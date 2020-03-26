@@ -14,6 +14,9 @@
     
     .deck {
         height: 5.5rem;
+        border: 0.1rem solid;
+        border-radius: 0.5rem;
+        border-color: rgb(221, 255, 0);
         background-color: rgb(221, 255, 0);
         width: 5rem;
         text-align: center;
@@ -32,7 +35,15 @@
         height: 5.5rem;
         width: 5rem;
         text-align: center;
-        background-color: darksalmon;
+        background-color: #ccc;
+        border: 0.1rem solid;
+        border-radius: 0.5rem;
+        border-color: rgb(221, 255, 0);
+        font-size: 2rem;
+    }
+    
+    .tossed {
+        font-size: 1.2rem;
     }
     
     .playerHand {
@@ -95,7 +106,10 @@
     }
     
     .card1 {
-        background-color: royalblue;
+        background-color: #ccc;
+        border: 0.1rem solid;
+        border-radius: 0.5rem;
+        border-color: rgb(221, 255, 0);
         margin: auto;
         height: 5.5rem;
         width: 5rem;
@@ -103,7 +117,10 @@
     }
     
     .card2 {
-        background-color: sandybrown;
+        background-color: #ccc;
+        border: 0.1rem solid;
+        border-radius: 0.5rem;
+        border-color: rgb(221, 255, 0);
         margin: auto;
         height: 5.5rem;
         width: 5rem;
@@ -111,7 +128,10 @@
     }
     
     .card3 {
-        background-color: skyblue;
+        background-color: #ccc;
+        border: 0.1rem solid;
+        border-radius: 0.5rem;
+        border-color: rgb(221, 255, 0);
         margin: auto;
         height: 5.5rem;
         width: 5rem;
