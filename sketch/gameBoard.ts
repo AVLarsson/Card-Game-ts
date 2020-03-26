@@ -35,6 +35,8 @@
         console.log(this.deck.getDeck());
  
 
+       console.log(this.cardUpdate());
+       this.player.getCardInHand(1);
        
     }
 
@@ -49,10 +51,15 @@
         this.player.tossCard(i);
     }  
 
-    // cardTwo: Card, cardThree: Card
+    //cardOne: Card, cardTwo: Card, cardThree: Card
 
-    cardUpdate(cardOne: Card){
-        let contentOne = cardOne.getSuit();
+    cardUpdate(){
+        //let contentOne = this.player.getCardInHand(0).getSuit();
+        //console.log(contentOne);
+      
+        
+        
+        
 
         // this.cardOneContent.innerHTML = cardOne;
         // this.cardTwoContent.innerHTML = cardTwo;

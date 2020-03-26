@@ -66,6 +66,8 @@ var GameBoard = (function () {
             this.player.drawCard(this.deck.getDeck());
         }
         console.log(this.deck.getDeck());
+        console.log(this.cardUpdate());
+        this.player.getCardInHand(1);
     };
     GameBoard.prototype.initialDrawCard = function (cards) {
         for (var i = 0; i < cards; i++) {
@@ -75,14 +77,15 @@ var GameBoard = (function () {
     GameBoard.prototype.tossedCard = function (i) {
         this.player.tossCard(i);
     };
-    GameBoard.prototype.cardUpdate = function (cardOne) {
-        var contentOne = cardOne.getSuit();
+    GameBoard.prototype.cardUpdate = function () {
     };
     return GameBoard;
 }());
 var Player = (function () {
     function Player() {
         this.cardsInHand = [];
+        this.rank = 0;
+        this.suit = 0;
     }
     Player.prototype.drawCard = function (array) {
         this.cardsInHand.push(array.pop());
@@ -91,6 +94,17 @@ var Player = (function () {
     };
     Player.prototype.tossCard = function (i) {
         this.cardsInHand.splice(i, 1);
+    };
+    Player.prototype.getCardInHand = function (i) {
+        console.log("card:");
+        console.log(this.cardsInHand[i]);
+        this.rank = this.cardsInHand[i].getRank();
+        this.suit = this.cardsInHand[i].getSuit();
+        console.log("CardInHand position " + i + " rank:");
+        console.log(this.rank);
+        console.log("CardInHand position " + i + " suit:");
+        console.log(this.suit);
+        return (null);
     };
     return Player;
 }());
