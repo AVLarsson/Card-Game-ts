@@ -1,3 +1,99 @@
-body {
-    background-color: rgb(177, 177, 177);
-}
+    body {
+        background-color: rgb(148, 148, 148);
+    }
+    
+    .wrapper {
+        height: 100%;
+        /* margin: auto; */
+        /* background-color: rgb(255, 234, 0); */
+        justify-content: space-between;
+        display: flex;
+        padding-top: 15rem;
+        padding-bottom: 5rem;
+    }
+    
+    .deck {
+        height: 5.5rem;
+        background-color: darkcyan;
+        width: 5rem;
+        text-align: center;
+    }
+    
+    .deck h2 {
+        padding-top: 0.5rem;
+    }
+    
+    .tossedCards {
+        height: 10rem;
+        background-color: darksalmon;
+    }
+    
+    .playerHand {
+        margin: auto;
+        width: 50%;
+        height: 6rem;
+        margin-bottom: 1rem;
+        background-color: darkorchid;
+        text-align: center;
+        display: flex;
+    }
+    
+    .card1 {
+        background-color: royalblue;
+        margin: auto;
+        height: 5.5rem;
+        width: 5rem;
+    }
+    
+    .card2 {
+        background-color: sandybrown;
+        margin: auto;
+        height: 5.5rem;
+        width: 5rem;
+    }
+    
+    .card3 {
+        background-color: skyblue;
+        margin: auto;
+        height: 5.5rem;
+        width: 5rem;
+    }
+    
+    .buttons {
+        padding-top: 0.2rem;
+        margin: auto;
+        width: 50%;
+        text-align: center;
+    }
+    
+    .increment {
+        background-color: rgb(240, 140, 208);
+        height: 2.5rem;
+        width: 4rem;
+        border-radius: 0.1rem;
+        box-shadow: 0.2rem 0.1rem rgba(75, 75, 75, 0.4);
+    }
+    
+    .decrement {
+        background-color: rgb(240, 225, 140);
+        height: 2.5rem;
+        width: 4rem;
+        border-radius: 0.1rem;
+        box-shadow: 0.2rem 0.1rem rgba(75, 75, 75, 0.4);
+    }
+    
+    .restart {
+        background-color: rgb(140, 188, 240);
+        height: 2.5rem;
+        width: 4rem;
+        border-radius: 0.1rem;
+        box-shadow: 0.2rem 0.1rem rgba(75, 75, 75, 0.4);
+    }
+    
+    .toss {
+        background-color: rgb(140, 240, 185);
+        height: 2.5rem;
+        width: 4rem;
+        border-radius: 0.1rem;
+        box-shadow: 0.2rem 0.1rem rgba(75, 75, 75, 0.4);
+    }

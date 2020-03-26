@@ -16,6 +16,8 @@ class Deck {
     }
 
     fillDeck() {
+        console.log('btn reached');
+        
         let j = 0;
         while (j < 4) {
             for (let i = 1; i<14; i++) {

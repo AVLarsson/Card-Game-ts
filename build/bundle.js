@@ -8,6 +8,12 @@ var Card = (function () {
     Card.prototype.makeFaceUp = function (isFaceUp) {
         this.isFaceUp = isFaceUp;
     };
+    Card.prototype.getSuit = function () {
+        return (this.suit);
+    };
+    Card.prototype.getRank = function () {
+        return (this.rank);
+    };
     return Card;
 }());
 var Deck = (function () {
@@ -18,6 +24,7 @@ var Deck = (function () {
         this.cards = [];
     };
     Deck.prototype.fillDeck = function () {
+        console.log('btn reached');
         var j = 0;
         while (j < 4) {
             for (var i = 1; i < 14; i++) {
@@ -48,10 +55,17 @@ var GameBoard = (function () {
     function GameBoard() {
         this.deck = new Deck;
         this.player = new Player;
+        this.cardOneContent = document.getElementById('card1');
+        this.cardOneContent = document.getElementById('card1');
     }
     GameBoard.prototype.restart = function () {
+        var cardOne = document.getElementById('card1');
         this.deck.clearDeck();
         this.deck.fillDeck();
+        for (var i = 0; i < 3; i++) {
+            this.player.drawCard(this.deck.getDeck());
+        }
+        console.log(this.deck.getDeck());
     };
     GameBoard.prototype.initialDrawCard = function (cards) {
         for (var i = 0; i < cards; i++) {
@@ -60,6 +74,9 @@ var GameBoard = (function () {
     };
     GameBoard.prototype.tossedCard = function (i) {
         this.player.tossCard(i);
+    };
+    GameBoard.prototype.cardUpdate = function (cardOne) {
+        var contentOne = cardOne.getSuit();
     };
     return GameBoard;
 }());
@@ -79,9 +96,13 @@ var Player = (function () {
 }());
 var Index = (function () {
     function Index() {
+        var _this = this;
         this.deck = new Deck();
         this.player = new Player();
+        this.gameBoard = new GameBoard();
         this.newGame();
+        var restartBtn = document.getElementById('restart');
+        restartBtn.addEventListener('click', function (e) { return _this.gameBoard.restart(); });
     }
     Index.prototype.newGame = function () {
         this.deck.fillDeck();

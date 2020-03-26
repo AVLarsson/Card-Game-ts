@@ -7,12 +7,18 @@
 class Index {
 	private deck: Deck;
 	private player: Player;
+	private gameBoard: GameBoard;
 
 	constructor() {
 		this.deck = new Deck();
 		this.player = new Player();
+		this.gameBoard = new GameBoard();
 		this.newGame();
+
+		let restartBtn = document.getElementById('restart')!;
+		restartBtn.addEventListener('click', (e:Event) => this.gameBoard.restart());
 	}
+
 	newGame() {
 		this.deck.fillDeck();
 		console.log(this.deck);
@@ -30,6 +36,7 @@ class Index {
 
 		console.log(this.deck.getDeck().length);
 	}
+
 }
 
 let newGame;

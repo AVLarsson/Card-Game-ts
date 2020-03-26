@@ -14,6 +14,15 @@
     makeFaceUp (isFaceUp: Boolean) {
         this.isFaceUp = isFaceUp;
     }
+    
+    getSuit(){
+        return(this.suit)
+    }
 
+    getRank(){
+        return(this.rank)
+    }
+
+    
 
 }
