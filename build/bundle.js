@@ -24,7 +24,6 @@ var Deck = (function () {
         this.cards = [];
     };
     Deck.prototype.fillDeck = function () {
-        console.log('btn reached');
         var j = 0;
         while (j < 4) {
             for (var i = 1; i < 14; i++) {
@@ -33,7 +32,6 @@ var Deck = (function () {
             j++;
         }
         this.shuffle(this.cards);
-        console.log("Number of cards in deck: " + this.cards.length);
     };
     Deck.prototype.shuffle = function (array) {
         var currentIndex = array.length, temporaryValue, randomIndex;
@@ -55,17 +53,18 @@ var GameBoard = (function () {
     function GameBoard() {
         this.deck = new Deck;
         this.player = new Player;
-        this.counter = 1;
+        this.counter = 2;
         this.selected1 = document.getElementById('selected1');
         this.selected2 = document.getElementById('selected2');
         this.selected3 = document.getElementById('selected3');
+        this.cardOne = document.getElementById('card1');
+        this.cardTwo = document.getElementById('card2');
+        this.cardThree = document.getElementById('card3');
+        this.tossPile = document.getElementById('tossedCard');
     }
     GameBoard.prototype.restart = function () {
-        var cardOne = document.getElementById('card1');
-        var cardTwo = document.getElementById('card2');
-        var cardThree = document.getElementById('card3');
-        this.selected1.style.display = 'inline';
-        this.selected2.style.display = 'none';
+        this.selected1.style.display = 'none';
+        this.selected2.style.display = 'inline';
         this.selected3.style.display = 'none';
         this.deck.clearDeck();
         this.player.clearCardsInHand();
@@ -73,11 +72,10 @@ var GameBoard = (function () {
         for (var i = 0; i < 3; i++) {
             this.player.drawCard(this.deck.getDeck());
         }
-        console.log(this.deck.getDeck());
-        console.log(this.cardUpdate());
-        cardOne.innerHTML = this.player.getCardInHand(0).join(' ');
-        cardTwo.innerHTML = this.player.getCardInHand(1).join(' ');
-        cardThree.innerHTML = this.player.getCardInHand(2).join(' ');
+        this.cardOne.innerHTML = this.player.getCardInHand(0).join(' ');
+        this.cardTwo.innerHTML = this.player.getCardInHand(1).join(' ');
+        this.cardThree.innerHTML = this.player.getCardInHand(2).join(' ');
+        this.tossPile.innerHTML = '';
     };
     GameBoard.prototype.increment = function () {
         if (this.counter > 2) {
@@ -131,18 +129,46 @@ var GameBoard = (function () {
                 break;
         }
     };
-    GameBoard.prototype.initialDrawCard = function (cards) {
-        for (var i = 0; i < cards; i++) {
-            this.player.drawCard(this.deck.getDeck());
-        }
-    };
-    GameBoard.prototype.tossedCard = function (i) {
-        this.player.tossCard(i);
+    GameBoard.prototype.tossedCard = function () {
+        this.tossPile.innerHTML = this.player.getCardInHand(this.counter - 1).join(' ');
+        this.player.tossCard(this.counter - 1);
+        this.player.drawCard(this.deck.getDeck());
+        this.cardUpdate();
     };
     GameBoard.prototype.cardUpdate = function () {
+        this.cardOne.innerHTML = this.player.getCardInHand(0).join(' ');
+        this.cardTwo.innerHTML = this.player.getCardInHand(1).join(' ');
+        this.cardThree.innerHTML = this.player.getCardInHand(2).join(' ');
     };
     return GameBoard;
 }());
+var Index = (function () {
+    function Index() {
+        var _this = this;
+        this.deck = new Deck();
+        this.player = new Player();
+        this.gameBoard = new GameBoard();
+        this.newGame();
+        var restartBtn = document.getElementById('restart');
+        restartBtn.addEventListener('click', function () { return _this.gameBoard.restart(); });
+        var plusBtn = document.getElementById('increment');
+        plusBtn.addEventListener('click', function () { return _this.gameBoard.increment(); });
+        var minusBtn = document.getElementById('decrement');
+        minusBtn.addEventListener('click', function () { return _this.gameBoard.decrement(); });
+        var tossBtn = document.getElementById('toss');
+        tossBtn.addEventListener('click', function () { return _this.gameBoard.tossedCard(); });
+    }
+    Index.prototype.newGame = function () {
+        this.deck.fillDeck();
+        for (var i = 0; i < 5; i++) {
+            this.player.drawCard(this.deck.getDeck());
+        }
+        this.player.tossCard(1);
+    };
+    return Index;
+}());
+var newGame;
+window.addEventListener('load', function () { newGame = new Index; });
 var Player = (function () {
     function Player() {
         this.cardsInHand = [];
@@ -199,33 +225,4 @@ var Player = (function () {
     };
     return Player;
 }());
-var Index = (function () {
-    function Index() {
-        var _this = this;
-        this.deck = new Deck();
-        this.player = new Player();
-        this.gameBoard = new GameBoard();
-        this.newGame();
-        var restartBtn = document.getElementById('restart');
-        restartBtn.addEventListener('click', function () { return _this.gameBoard.restart(); });
-        var plusBtn = document.getElementById('increment');
-        plusBtn.addEventListener('click', function () { return _this.gameBoard.increment(); });
-        var minusBtn = document.getElementById('decrement');
-        minusBtn.addEventListener('click', function () { return _this.gameBoard.decrement(); });
-    }
-    Index.prototype.newGame = function () {
-        this.deck.fillDeck();
-        console.log(this.deck);
-        console.log('Annies kortspel');
-        console.log('Player drew:');
-        for (var i = 0; i < 5; i++) {
-            this.player.drawCard(this.deck.getDeck());
-        }
-        this.player.tossCard(1);
-        console.log(this.deck.getDeck().length);
-    };
-    return Index;
-}());
-var newGame;
-window.addEventListener('load', function () { newGame = new Index; });
 //# sourceMappingURL=bundle.js.map

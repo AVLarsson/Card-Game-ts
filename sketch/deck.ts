@@ -1,23 +1,17 @@
 
-
-
 class Deck {
 
     private cards: Array<Card>;
 
     constructor() {
-
-        this.cards = [];
-        
+        this.cards = []; 
     }
 
     clearDeck() {
         this.cards = [];
     }
 
-    fillDeck() {
-        console.log('btn reached');
-        
+    fillDeck() {    
         let j = 0;
         while (j < 4) {
             for (let i = 1; i<14; i++) {
@@ -26,7 +20,6 @@ class Deck {
             j++;
         }
         this.shuffle(this.cards);
-        console.log("Number of cards in deck: " + this.cards.length)
     }
 
     /** Durstenfeld shuffle */
@@ -45,10 +38,9 @@ class Deck {
           array[currentIndex] = array[randomIndex];
           array[randomIndex] = temporaryValue;
         }
-      
         return array;
-      }
-
+    }
+    
     getDeck() {
         return this.cards;
     }

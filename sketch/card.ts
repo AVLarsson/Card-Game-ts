@@ -22,7 +22,4 @@
     getRank(){
         return(this.rank)
     }
-
-    
-
 }
