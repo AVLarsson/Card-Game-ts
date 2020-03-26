@@ -25,6 +25,10 @@
         this.cardsInHand[this.cardsInHand.length-1].makeFaceUp(true);
         return(this.cardsInHand);
     }
+
+    clearCardsInHand(){
+        this.cardsInHand = [];
+    }
     
 
     tossCard(i: number) {
@@ -32,19 +36,57 @@
     }
 
     getCardInHand(i:number){
-        console.log("card:");
-        console.log(this.cardsInHand[i]);
+        // console.log("card:");
+        // console.log(this.cardsInHand[i]);
+        let cardInfo = [this.cardsInHand[i].getRank(), this.cardsInHand[i].getSuit()];
+        let cardInfoStr = cardInfo.map(String);
+        
+        switch (cardInfoStr[0]) {
+            case '1':
+                cardInfoStr[0] = 'A';
+                break;
+            case '11':
+                cardInfoStr[0] = 'Kn';
+                break;
+            case '12':
+                cardInfoStr[0] = 'Q';
+                break;
+             case '13':
+                cardInfoStr[0] = 'K';
+                break;
+            default:
+                break;
+        }
+
+        switch (cardInfoStr[1]) {
+            case '0':
+                cardInfoStr[1] = '♥';
+                break;
+            case '1':
+                cardInfoStr[1] = '♦';
+                break;
+            case '2':
+                cardInfoStr[1] = '♠';
+                break;
+            case '3':
+                cardInfoStr[1] = '♣';
+                break;
+        
+            default:
+                break;
+        }
         
         
-        this.rank = this.cardsInHand[i].getRank();
-        this.suit = this.cardsInHand[i].getSuit();
-        console.log("CardInHand position " + i + " rank:");        
-        console.log(this.rank);
+        // this.rank = this.cardsInHand[i].getRank();
+        // this.suit = this.cardsInHand[i].getSuit();
+
+        // console.log("CardInHand position " + i + " rank:");        
+        // console.log(this.rank);
         
-        console.log("CardInHand position " + i + " suit:");        
-        console.log(this.suit);    
+        // console.log("CardInHand position " + i + " suit:");        
+        // console.log(this.suit);    
     
-        return(null);
+        return(cardInfoStr);
     //     if (i >= 0 && i <= 2) {
     //          return(this.cardsInHand[i]);
     //     }

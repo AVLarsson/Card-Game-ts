@@ -55,19 +55,81 @@ var GameBoard = (function () {
     function GameBoard() {
         this.deck = new Deck;
         this.player = new Player;
-        this.cardOneContent = document.getElementById('card1');
-        this.cardOneContent = document.getElementById('card1');
+        this.counter = 1;
+        this.selected1 = document.getElementById('selected1');
+        this.selected2 = document.getElementById('selected2');
+        this.selected3 = document.getElementById('selected3');
     }
     GameBoard.prototype.restart = function () {
         var cardOne = document.getElementById('card1');
+        var cardTwo = document.getElementById('card2');
+        var cardThree = document.getElementById('card3');
+        this.selected1.style.display = 'inline';
+        this.selected2.style.display = 'none';
+        this.selected3.style.display = 'none';
         this.deck.clearDeck();
+        this.player.clearCardsInHand();
         this.deck.fillDeck();
         for (var i = 0; i < 3; i++) {
             this.player.drawCard(this.deck.getDeck());
         }
         console.log(this.deck.getDeck());
         console.log(this.cardUpdate());
-        this.player.getCardInHand(1);
+        cardOne.innerHTML = this.player.getCardInHand(0).join(' ');
+        cardTwo.innerHTML = this.player.getCardInHand(1).join(' ');
+        cardThree.innerHTML = this.player.getCardInHand(2).join(' ');
+    };
+    GameBoard.prototype.increment = function () {
+        if (this.counter > 2) {
+        }
+        else {
+            this.counter++;
+        }
+        switch (this.counter) {
+            case 1:
+                this.selected1.style.display = 'inline';
+                this.selected2.style.display = 'none';
+                this.selected3.style.display = 'none';
+                break;
+            case 2:
+                this.selected2.style.display = 'inline';
+                this.selected3.style.display = 'none';
+                this.selected1.style.display = 'none';
+                break;
+            case 3:
+                this.selected3.style.display = 'inline';
+                this.selected2.style.display = 'none';
+                this.selected1.style.display = 'none';
+                break;
+            default:
+                break;
+        }
+    };
+    GameBoard.prototype.decrement = function () {
+        if (this.counter < 2) {
+        }
+        else {
+            this.counter--;
+        }
+        switch (this.counter) {
+            case 1:
+                this.selected1.style.display = 'inline';
+                this.selected2.style.display = 'none';
+                this.selected3.style.display = 'none';
+                break;
+            case 2:
+                this.selected2.style.display = 'inline';
+                this.selected3.style.display = 'none';
+                this.selected1.style.display = 'none';
+                break;
+            case 3:
+                this.selected3.style.display = 'inline';
+                this.selected2.style.display = 'none';
+                this.selected1.style.display = 'none';
+                break;
+            default:
+                break;
+        }
     };
     GameBoard.prototype.initialDrawCard = function (cards) {
         for (var i = 0; i < cards; i++) {
@@ -92,19 +154,48 @@ var Player = (function () {
         this.cardsInHand[this.cardsInHand.length - 1].makeFaceUp(true);
         return (this.cardsInHand);
     };
+    Player.prototype.clearCardsInHand = function () {
+        this.cardsInHand = [];
+    };
     Player.prototype.tossCard = function (i) {
         this.cardsInHand.splice(i, 1);
     };
     Player.prototype.getCardInHand = function (i) {
-        console.log("card:");
-        console.log(this.cardsInHand[i]);
-        this.rank = this.cardsInHand[i].getRank();
-        this.suit = this.cardsInHand[i].getSuit();
-        console.log("CardInHand position " + i + " rank:");
-        console.log(this.rank);
-        console.log("CardInHand position " + i + " suit:");
-        console.log(this.suit);
-        return (null);
+        var cardInfo = [this.cardsInHand[i].getRank(), this.cardsInHand[i].getSuit()];
+        var cardInfoStr = cardInfo.map(String);
+        switch (cardInfoStr[0]) {
+            case '1':
+                cardInfoStr[0] = 'A';
+                break;
+            case '11':
+                cardInfoStr[0] = 'Kn';
+                break;
+            case '12':
+                cardInfoStr[0] = 'Q';
+                break;
+            case '13':
+                cardInfoStr[0] = 'K';
+                break;
+            default:
+                break;
+        }
+        switch (cardInfoStr[1]) {
+            case '0':
+                cardInfoStr[1] = '♥';
+                break;
+            case '1':
+                cardInfoStr[1] = '♦';
+                break;
+            case '2':
+                cardInfoStr[1] = '♠';
+                break;
+            case '3':
+                cardInfoStr[1] = '♣';
+                break;
+            default:
+                break;
+        }
+        return (cardInfoStr);
     };
     return Player;
 }());
@@ -116,7 +207,11 @@ var Index = (function () {
         this.gameBoard = new GameBoard();
         this.newGame();
         var restartBtn = document.getElementById('restart');
-        restartBtn.addEventListener('click', function (e) { return _this.gameBoard.restart(); });
+        restartBtn.addEventListener('click', function () { return _this.gameBoard.restart(); });
+        var plusBtn = document.getElementById('increment');
+        plusBtn.addEventListener('click', function () { return _this.gameBoard.increment(); });
+        var minusBtn = document.getElementById('decrement');
+        minusBtn.addEventListener('click', function () { return _this.gameBoard.decrement(); });
     }
     Index.prototype.newGame = function () {
         this.deck.fillDeck();
@@ -126,10 +221,7 @@ var Index = (function () {
         for (var i = 0; i < 5; i++) {
             this.player.drawCard(this.deck.getDeck());
         }
-        console.log(this.player.cardsInHand);
         this.player.tossCard(1);
-        console.log('player toss away index 1');
-        console.log(this.player.cardsInHand);
         console.log(this.deck.getDeck().length);
     };
     return Index;

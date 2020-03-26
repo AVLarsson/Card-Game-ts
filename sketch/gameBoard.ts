@@ -4,30 +4,34 @@
  class GameBoard {
     private deck: Deck;
     private player: Player;
+    private counter: number;
+    private selected1: HTMLInputElement;
+    private selected2: HTMLInputElement;
+    private selected3: HTMLInputElement;
     //private playerHand: Array<Card>;
     //private tossedCards: Array<Card>;
-    private cardOneContent: HTMLElement;
+    // private cardOneContent: HTMLElement;
 
     constructor() {
         this.deck = new Deck;
         this.player = new Player;
-
-     
-		// let cardTwoContent: HTMLElement;
-		// let cardThreeContent: HTMLElement;
-
-        this.cardOneContent = <HTMLElement> document.getElementById('card1');
-        this.cardOneContent = document.getElementById('card1') as HTMLElement;
-        // cardTwoContent = document.getElementById('card2');
-        // cardThreeContent = document.getElementById('card3');
-    
-    //    this.playerHand = [];
-    //    this.tossedCards = [];
+        this.counter = 1;
+        this.selected1 = document.getElementById('selected1') as HTMLInputElement;
+        this.selected2 = document.getElementById('selected2') as HTMLInputElement;
+        this.selected3 = document.getElementById('selected3') as HTMLInputElement;
     }
     
     restart() {
         let cardOne = document.getElementById('card1') as HTMLInputElement;
+        let cardTwo = document.getElementById('card2') as HTMLInputElement;
+        let cardThree = document.getElementById('card3') as HTMLInputElement;
+     
+        this.selected1.style.display = 'inline';
+        this.selected2.style.display = 'none';
+        this.selected3.style.display = 'none';
+
         this.deck.clearDeck();
+        this.player.clearCardsInHand();
         this.deck.fillDeck();
         for (let i = 0; i < 3; i++) {
 		    this.player.drawCard(this.deck.getDeck());
@@ -36,9 +40,68 @@
  
 
        console.log(this.cardUpdate());
-       this.player.getCardInHand(1);
+        cardOne.innerHTML = this.player.getCardInHand(0).join(' ');
+        cardTwo.innerHTML = this.player.getCardInHand(1).join(' ');
+        cardThree.innerHTML = this.player.getCardInHand(2).join(' ');
        
     }
+
+    increment(){
+        if(this.counter > 2){
+        } else {
+            this.counter++;
+        }
+        switch (this.counter) {
+            case 1:
+                this.selected1.style.display = 'inline';
+                this.selected2.style.display = 'none';
+                this.selected3.style.display = 'none';
+                break;
+            case 2:
+                this.selected2.style.display = 'inline';
+                this.selected3.style.display = 'none';
+                this.selected1.style.display = 'none';
+                break;
+            case 3:
+                this.selected3.style.display = 'inline';
+                this.selected2.style.display = 'none';
+                this.selected1.style.display = 'none';
+                break;
+        
+            default:
+                break;
+        }
+       
+    }
+
+    decrement(){
+        if(this.counter < 2){
+        } else {
+            this.counter--;
+        }
+     switch (this.counter) {
+            case 1:
+                this.selected1.style.display = 'inline';
+                this.selected2.style.display = 'none';
+                this.selected3.style.display = 'none';
+                break;
+            case 2:
+                this.selected2.style.display = 'inline';
+                this.selected3.style.display = 'none';
+                this.selected1.style.display = 'none';
+                break;
+            case 3:
+                this.selected3.style.display = 'inline';
+                this.selected2.style.display = 'none';
+                this.selected1.style.display = 'none';
+                break;
+        
+            default:
+                break;
+        }
+    }
+
+    
 
 
     initialDrawCard(cards: number) {
