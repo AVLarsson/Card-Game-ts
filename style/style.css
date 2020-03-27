@@ -1,5 +1,4 @@
     body {
-        /* background-color: rgb(223, 223, 223); */
         background-image: url('../pictures/background.jpg');
     }
     
@@ -131,6 +130,9 @@
         font-size: 2rem;
         position: absolute;
         display: none;
+        -webkit-box-shadow: 0px 0px 76px -33px rgba(69, 69, 69, 1);
+        -moz-box-shadow: 0px 0px 76px -33px rgba(69, 69, 69, 1);
+        box-shadow: 0px 0px 76px -33px rgba(69, 69, 69, 1);
     }
     
     .card2 {
@@ -145,6 +147,9 @@
         font-size: 2rem;
         position: absolute;
         display: none;
+        -webkit-box-shadow: 0px 0px 76px -33px rgba(69, 69, 69, 1);
+        -moz-box-shadow: 0px 0px 76px -33px rgba(69, 69, 69, 1);
+        box-shadow: 0px 0px 76px -33px rgba(69, 69, 69, 1);
     }
     
     .card3 {
@@ -159,6 +164,9 @@
         width: 5rem;
         font-size: 2rem;
         display: none;
+        -webkit-box-shadow: 0px 0px 76px -33px rgba(69, 69, 69, 1);
+        -moz-box-shadow: 0px 0px 76px -33px rgba(69, 69, 69, 1);
+        box-shadow: 0px 0px 76px -33px rgba(69, 69, 69, 1);
     }
     
     .buttons {
