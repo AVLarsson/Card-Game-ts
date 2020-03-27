@@ -2,9 +2,11 @@
 class Deck {
 
     private cards: Array<Card>;
+    private gameDeck: HTMLInputElement;
 
     constructor() {
         this.cards = []; 
+        this.gameDeck = document.getElementById('deck') as HTMLInputElement;
     }
 
     clearDeck() {
@@ -14,7 +16,7 @@ class Deck {
     fillDeck() {    
         let j = 0;
         while (j < 4) {
-            for (let i = 1; i<14; i++) {
+            for (let i = 1; i<3; i++) {
                 this.cards.push(new Card(j, i));
             }
             j++;
@@ -40,8 +42,18 @@ class Deck {
         }
         return array;
     }
+
+    showDeck() {
+        this.gameDeck.style.display = 'inline';
+    }
     
     getDeck() {
-        return this.cards;
+        // if(this.cards === undefined || this.cards.length == 0){
+        //     this.gameDeck.style.display = 'none';
+        //     return (-1);
+        // }
+        // else {
+            return this.cards;
+       
     }
 }

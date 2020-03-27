@@ -3,7 +3,7 @@
     }
     
     .wrapper {
-        height: 100%;
+        height: 10rem;
         /* margin: auto; */
         /* background-color: rgb(255, 234, 0); */
         justify-content: space-between;
@@ -19,6 +19,7 @@
         border-color: rgb(221, 255, 0);
         background-color: rgb(221, 255, 0);
         width: 5rem;
+        margin-left: 38rem;
         text-align: center;
         background-image: linear-gradient(45deg, #ccc 25%, transparent 25%), linear-gradient(135deg, #ccc 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #ccc 75%), linear-gradient(135deg, transparent 75%, #ccc 75%);
         background-size: 0.7rem 0.7rem;
@@ -34,12 +35,16 @@
     .tossedCards {
         height: 5.5rem;
         width: 5rem;
+        margin-left: 46rem;
         text-align: center;
         background-color: #ccc;
         border: 0.1rem solid;
         border-radius: 0.5rem;
         border-color: rgb(221, 255, 0);
         font-size: 2rem;
+        display: none;
+        color: rgb(89, 89, 89);
+        position: absolute;
     }
     
     .tossed {
@@ -110,10 +115,13 @@
         border: 0.1rem solid;
         border-radius: 0.5rem;
         border-color: rgb(221, 255, 0);
-        margin: auto;
+        margin-top: 2rem;
+        margin-left: 1rem;
         height: 5.5rem;
         width: 5rem;
         font-size: 2rem;
+        position: absolute;
+        display: none;
     }
     
     .card2 {
@@ -121,10 +129,13 @@
         border: 0.1rem solid;
         border-radius: 0.5rem;
         border-color: rgb(221, 255, 0);
-        margin: auto;
         height: 5.5rem;
         width: 5rem;
+        margin-top: 2rem;
+        margin-left: 8.5rem;
         font-size: 2rem;
+        position: absolute;
+        display: none;
     }
     
     .card3 {
@@ -132,10 +143,13 @@
         border: 0.1rem solid;
         border-radius: 0.5rem;
         border-color: rgb(221, 255, 0);
-        margin: auto;
+        margin-top: 2rem;
+        margin-left: 16rem;
+        position: absolute;
         height: 5.5rem;
         width: 5rem;
         font-size: 2rem;
+        display: none;
     }
     
     .buttons {

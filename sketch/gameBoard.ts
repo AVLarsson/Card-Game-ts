@@ -10,12 +10,16 @@
     private cardTwo: HTMLInputElement;
     private cardThree: HTMLInputElement;
     private tossPile: HTMLInputElement;
+    private gameOn: boolean;
+    private startBtn: HTMLInputElement;
   
 
     constructor() {
+        
         this.deck = new Deck;
         this.player = new Player;
         this.counter = 2;
+        this.gameOn = false;
         this.selected1 = document.getElementById('selected1') as HTMLInputElement;
         this.selected2 = document.getElementById('selected2') as HTMLInputElement;
         this.selected3 = document.getElementById('selected3') as HTMLInputElement;
@@ -24,14 +28,23 @@
         this.cardTwo = document.getElementById('card2') as HTMLInputElement;
         this.cardThree = document.getElementById('card3') as HTMLInputElement;
         this.tossPile = document.getElementById('tossedCard') as HTMLInputElement;
+        this.startBtn = document.getElementById('restart') as HTMLInputElement;
     }
     
 
     restart() {
+        
+        this.gameOn = true;
+        this.counter = 2;
+        this.cardOne.style.display = 'inline';
+        this.cardTwo.style.display = 'inline';
+        this.cardThree.style.display = 'inline';
+        this.tossPile.style.display = 'none';
         this.selected1.style.display = 'none';
         this.selected2.style.display = 'inline';
         this.selected3.style.display = 'none';
 
+        this.deck.showDeck();
         this.deck.clearDeck();
         this.player.clearCardsInHand();
         this.deck.fillDeck();
@@ -44,10 +57,12 @@
         this.cardTwo.innerHTML = this.player.getCardInHand(1).join(' ');
         this.cardThree.innerHTML = this.player.getCardInHand(2).join(' ');
         this.tossPile.innerHTML = '';
+        this.startBtn.innerHTML = 'Restart';
     }
 
     increment(){
-        if(this.counter > 2){
+        if (this.gameOn){
+        if (this.counter > 2){
         } else {
             this.counter++;
         }
@@ -71,10 +86,11 @@
             default:
                 break;
         }
-       
+        }
     }
 
     decrement(){
+        if (this.gameOn){
         if(this.counter < 2){
         } else {
             this.counter--;
@@ -99,20 +115,50 @@
             default:
                 break;
         }
+        }
     }
 
     
     tossedCard() {
-      this.tossPile.innerHTML = this.player.getCardInHand(this.counter-1).join(' '); 
-      this.player.tossCard(this.counter-1);
-      this.player.drawCard(this.deck.getDeck());
-      this.cardUpdate();
+    if (this.gameOn){
+
+    this.tossPile.style.display = 'inline';
+    this.tossPile.innerHTML = this.player.getCardInHand(this.counter-1).join(' '); //Problem!
+    this.player.tossCard(this.counter-1);
+    
+    
+    if (this.deck.getDeck().length > 0) {
+        this.player.drawCard(this.deck.getDeck());
+    } 
+    this.cardUpdate();
     }  
+    }
 
 
     cardUpdate(){
-        this.cardOne.innerHTML = this.player.getCardInHand(0).join(' ');
-        this.cardTwo.innerHTML = this.player.getCardInHand(1).join(' ');
-        this.cardThree.innerHTML = this.player.getCardInHand(2).join(' ');
+            console.log(this.player.getCardsInHand());
+            
+            if (this.player.getCardsInHand().length == 3) {
+               this.cardThree.innerHTML = this.player.getCardInHand(2).join(' '); 
+                this.cardOne.innerHTML = this.player.getCardInHand(0).join(' ');
+                this.cardTwo.innerHTML = this.player.getCardInHand(1).join(' ');
+            } 
+            if (this.player.getCardsInHand().length == 2) {
+                this.cardOne.innerHTML = this.player.getCardInHand(0).join(' ');
+                this.cardTwo.innerHTML = this.player.getCardInHand(1).join(' ');
+                this.cardThree.style.display = 'none';
+            } 
+            if (this.player.getCardsInHand().length == 1) {
+                this.cardTwo.style.display = 'none';
+                this.cardOne.innerHTML = this.player.getCardInHand(0).join(' ');
+            } 
+            if (this.player.getCardsInHand().length == 0) {
+                this.cardOne.style.display = 'none';
+            }
+            
+            
+       
+        
+       
 	}
 }

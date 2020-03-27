@@ -4,8 +4,10 @@
     private cardsInHand: Array<Card>;
     private rank: number;
     private suit: number;
+    private deck: Deck;
 
     constructor() {
+        this.deck = new Deck();
         this.cardsInHand = [];
         this.rank = 0;
         this.suit = 0;
@@ -14,9 +16,18 @@
     
     /** Hämtar det sista elementet i cards och tar samtidigt bort respektive index. */
     drawCard(array: Array<Card>) {
-        this.cardsInHand.push(array.pop()!);
-        this.cardsInHand[this.cardsInHand.length-1].makeFaceUp(true);
-        return(this.cardsInHand);
+        // if(array === 'undefined'){
+        //     return(null);
+        // } else {
+            // if (this.deck.getDeck().length != 0) {
+                this.cardsInHand.push(array.pop()!);
+                this.cardsInHand[this.cardsInHand.length-1].makeFaceUp(true);
+                return(this.cardsInHand);
+            // } 
+
+
+        
+        // }
     }
 
     clearCardsInHand(){
@@ -28,8 +39,17 @@
         
     }
 
+    getCardsInHand() {
+        return this.cardsInHand;
+    }
+
     getCardInHand(i:number){
-        let cardInfo = [this.cardsInHand[i].getRank(), this.cardsInHand[i].getSuit()];
+        
+        
+        // if (this.cardsInHand.length == 3) {
+            let cardInfo = [this.cardsInHand[i].getRank(), this.cardsInHand[i].getSuit()];
+        // }
+        
         let cardInfoStr = cardInfo.map(String);
         
         switch (cardInfoStr[0]) {
