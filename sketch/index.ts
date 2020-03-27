@@ -8,7 +8,7 @@ class Index {
 		this.deck = new Deck();
 		this.player = new Player();
 		this.gameBoard = new GameBoard();
-		this.newGame();
+	
 
 		let restartBtn = document.getElementById('restart')!;
 		restartBtn.addEventListener('click', () => this.gameBoard.restart());
@@ -22,17 +22,10 @@ class Index {
 		let tossBtn = document.getElementById('toss')!;
 		tossBtn.addEventListener('click', () => this.gameBoard.tossedCard());
 	}
-	
-
-	newGame() {
-		this.deck.fillDeck();
-		for (let i = 0; i < 5; i++) {
-			this.player.drawCard(this.deck.getDeck());
-		}
-		this.player.tossCard(1);
-	}
-
 }
 
+/*
+* Initiates the class index when the page is fully loaded.
+*/
 let newGame;
 window.addEventListener('load', () => {newGame = new Index});

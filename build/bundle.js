@@ -27,7 +27,7 @@ var Deck = (function () {
     Deck.prototype.fillDeck = function () {
         var j = 0;
         while (j < 4) {
-            for (var i = 1; i < 3; i++) {
+            for (var i = 1; i < 14; i++) {
                 this.cards.push(new Card(j, i));
             }
             j++;
@@ -48,6 +48,9 @@ var Deck = (function () {
     Deck.prototype.showDeck = function () {
         this.gameDeck.style.display = 'inline';
     };
+    Deck.prototype.hideDeck = function () {
+        this.gameDeck.style.display = 'none';
+    };
     Deck.prototype.getDeck = function () {
         return this.cards;
     };
@@ -55,8 +58,8 @@ var Deck = (function () {
 }());
 var GameBoard = (function () {
     function GameBoard() {
-        this.deck = new Deck;
-        this.player = new Player;
+        this.deck = new Deck();
+        this.player = new Player();
         this.counter = 2;
         this.gameOn = false;
         this.selected1 = document.getElementById('selected1');
@@ -93,10 +96,14 @@ var GameBoard = (function () {
     };
     GameBoard.prototype.increment = function () {
         if (this.gameOn) {
-            if (this.counter > 2) {
-            }
-            else {
+            if (this.counter < 3 && this.player.getCardsInHand().length == 3) {
                 this.counter++;
+            }
+            else if (this.counter < 2 && this.player.getCardsInHand().length == 2) {
+                this.counter++;
+            }
+            else if (this.player.getCardsInHand().length == 1) {
+                this.counter = 1;
             }
             switch (this.counter) {
                 case 1:
@@ -155,11 +162,27 @@ var GameBoard = (function () {
             if (this.deck.getDeck().length > 0) {
                 this.player.drawCard(this.deck.getDeck());
             }
+            if (this.deck.getDeck().length == 0) {
+                this.deck.hideDeck();
+            }
+            if (this.player.getCardsInHand().length == 2) {
+                this.counter = 2;
+                this.increment();
+            }
+            else if (this.player.getCardsInHand().length == 1) {
+                this.increment();
+                this.counter = 1;
+            }
+            else if (this.player.getCardsInHand().length == 0) {
+                this.selected1.style.display = 'none';
+                this.selected2.style.display = 'none';
+                this.selected3.style.display = 'none';
+                this.gameOn = false;
+            }
             this.cardUpdate();
         }
     };
     GameBoard.prototype.cardUpdate = function () {
-        console.log(this.player.getCardsInHand());
         if (this.player.getCardsInHand().length == 3) {
             this.cardThree.innerHTML = this.player.getCardInHand(2).join(' ');
             this.cardOne.innerHTML = this.player.getCardInHand(0).join(' ');
@@ -186,7 +209,6 @@ var Index = (function () {
         this.deck = new Deck();
         this.player = new Player();
         this.gameBoard = new GameBoard();
-        this.newGame();
         var restartBtn = document.getElementById('restart');
         restartBtn.addEventListener('click', function () { return _this.gameBoard.restart(); });
         var plusBtn = document.getElementById('increment');
@@ -196,13 +218,6 @@ var Index = (function () {
         var tossBtn = document.getElementById('toss');
         tossBtn.addEventListener('click', function () { return _this.gameBoard.tossedCard(); });
     }
-    Index.prototype.newGame = function () {
-        this.deck.fillDeck();
-        for (var i = 0; i < 5; i++) {
-            this.player.drawCard(this.deck.getDeck());
-        }
-        this.player.tossCard(1);
-    };
     return Index;
 }());
 var newGame;
@@ -217,7 +232,7 @@ var Player = (function () {
     Player.prototype.drawCard = function (array) {
         this.cardsInHand.push(array.pop());
         this.cardsInHand[this.cardsInHand.length - 1].makeFaceUp(true);
-        return (this.cardsInHand);
+        return this.cardsInHand;
     };
     Player.prototype.clearCardsInHand = function () {
         this.cardsInHand = [];
@@ -263,7 +278,7 @@ var Player = (function () {
             default:
                 break;
         }
-        return (cardInfoStr);
+        return cardInfoStr;
     };
     return Player;
 }());

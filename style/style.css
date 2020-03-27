@@ -1,11 +1,16 @@
     body {
-        background-color: rgb(148, 148, 148);
+        /* background-color: rgb(223, 223, 223); */
+        background-image: url('../pictures/background.jpg');
+    }
+    
+    .header {
+        text-align: center;
+        color: rgb(42, 42, 42);
+        font-family: monospace;
     }
     
     .wrapper {
         height: 10rem;
-        /* margin: auto; */
-        /* background-color: rgb(255, 234, 0); */
         justify-content: space-between;
         display: flex;
         padding-top: 15rem;
@@ -23,13 +28,7 @@
         text-align: center;
         background-image: linear-gradient(45deg, #ccc 25%, transparent 25%), linear-gradient(135deg, #ccc 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #ccc 75%), linear-gradient(135deg, transparent 75%, #ccc 75%);
         background-size: 0.7rem 0.7rem;
-        /* Must be a square */
         background-position: 0 0, 12.5px 0, 12.5px -12.5px, 0px 12.5px;
-        /* Must be half of one side of the square */
-    }
-    
-    .deck h2 {
-        padding-top: 0.5rem;
     }
     
     .tossedCards {
@@ -37,13 +36,13 @@
         width: 5rem;
         margin-left: 46rem;
         text-align: center;
-        background-color: #ccc;
+        background-color: #fbf5d7;
         border: 0.1rem solid;
         border-radius: 0.5rem;
         border-color: rgb(221, 255, 0);
         font-size: 2rem;
         display: none;
-        color: rgb(89, 89, 89);
+        color: rgb(104, 103, 103);
         position: absolute;
     }
     
@@ -56,9 +55,20 @@
         width: 50%;
         height: 10rem;
         margin-bottom: 1rem;
-        background-color: darkorchid;
-        /* text-align: center;
-        display: flex; */
+        background-color: rgb(119, 230, 182);
+        border: solid 0.5rem;
+        border-color: rgba(137, 255, 204, 0.3);
+        border-radius: 2rem;
+        -webkit-box-shadow: 0px 0px 76px -33px rgba(69, 69, 69, 1);
+        -moz-box-shadow: 0px 0px 76px -33px rgba(69, 69, 69, 1);
+        box-shadow: 0px 0px 76px -33px rgba(69, 69, 69, 1);
+    }
+    
+    .hands {
+        position: absolute;
+        height: 10rem;
+        margin-left: 15rem;
+        transform: rotate(342deg);
     }
     
     .selected1 {
@@ -67,10 +77,9 @@
         width: 0.5rem;
         margin-top: 1rem;
         margin-left: 3.5rem;
-        background-color: springgreen;
+        background-color: rgb(244, 255, 87);
         position: absolute;
         display: none;
-        /* display: none; */
     }
     
     .selected2 {
@@ -80,7 +89,7 @@
         height: 1rem;
         width: 0.5rem;
         position: absolute;
-        background-color: springgreen;
+        background-color: rgb(221, 255, 0);
         display: none;
     }
     
@@ -90,7 +99,7 @@
         margin-top: 1rem;
         height: 1rem;
         width: 0.5rem;
-        background-color: springgreen;
+        background-color: rgb(221, 255, 0);
         position: absolute;
         display: none;
     }
@@ -111,7 +120,7 @@
     }
     
     .card1 {
-        background-color: #ccc;
+        background-color: #fbf5d7;
         border: 0.1rem solid;
         border-radius: 0.5rem;
         border-color: rgb(221, 255, 0);
@@ -125,7 +134,7 @@
     }
     
     .card2 {
-        background-color: #ccc;
+        background-color: #fbf5d7;
         border: 0.1rem solid;
         border-radius: 0.5rem;
         border-color: rgb(221, 255, 0);
@@ -139,7 +148,7 @@
     }
     
     .card3 {
-        background-color: #ccc;
+        background-color: #fbf5d7;
         border: 0.1rem solid;
         border-radius: 0.5rem;
         border-color: rgb(221, 255, 0);
@@ -160,22 +169,6 @@
     }
     
     .increment {
-        background-color: rgb(240, 140, 208);
-        height: 2.5rem;
-        width: 4rem;
-        border-radius: 0.1rem;
-        box-shadow: 0.2rem 0.1rem rgba(75, 75, 75, 0.4);
-    }
-    
-    .decrement {
-        background-color: rgb(240, 225, 140);
-        height: 2.5rem;
-        width: 4rem;
-        border-radius: 0.1rem;
-        box-shadow: 0.2rem 0.1rem rgba(75, 75, 75, 0.4);
-    }
-    
-    .restart {
         background-color: rgb(140, 188, 240);
         height: 2.5rem;
         width: 4rem;
@@ -183,8 +176,24 @@
         box-shadow: 0.2rem 0.1rem rgba(75, 75, 75, 0.4);
     }
     
-    .toss {
+    .decrement {
+        background-color: rgb(140, 188, 240);
+        height: 2.5rem;
+        width: 4rem;
+        border-radius: 0.1rem;
+        box-shadow: 0.2rem 0.1rem rgba(75, 75, 75, 0.4);
+    }
+    
+    .restart {
         background-color: rgb(140, 240, 185);
+        height: 2.5rem;
+        width: 4rem;
+        border-radius: 0.1rem;
+        box-shadow: 0.2rem 0.1rem rgba(75, 75, 75, 0.4);
+    }
+    
+    .toss {
+        background-color: rgb(240, 140, 208);
         height: 2.5rem;
         width: 4rem;
         border-radius: 0.1rem;

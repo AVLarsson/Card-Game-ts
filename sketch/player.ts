@@ -1,92 +1,82 @@
+class Player {
+	private cardsInHand: Array<Card>;
+	private rank: number;
+	private suit: number;
+	private deck: Deck;
 
- class Player {
+	constructor() {
+		this.deck = new Deck();
+		this.cardsInHand = [];
+		this.rank = 0;
+		this.suit = 0;
+	}
 
-    private cardsInHand: Array<Card>;
-    private rank: number;
-    private suit: number;
-    private deck: Deck;
+	/*
+    * Transfers the last element of the argument array to the last avaliable index in player hand.
+    */
+	drawCard(array: Array<Card>) {
+		this.cardsInHand.push(array.pop()!);
+		this.cardsInHand[this.cardsInHand.length - 1].makeFaceUp(true);
+		return this.cardsInHand;
+	}
 
-    constructor() {
-        this.deck = new Deck();
-        this.cardsInHand = [];
-        this.rank = 0;
-        this.suit = 0;
-        
-    }
-    
-    /** Hämtar det sista elementet i cards och tar samtidigt bort respektive index. */
-    drawCard(array: Array<Card>) {
-        // if(array === 'undefined'){
-        //     return(null);
-        // } else {
-            // if (this.deck.getDeck().length != 0) {
-                this.cardsInHand.push(array.pop()!);
-                this.cardsInHand[this.cardsInHand.length-1].makeFaceUp(true);
-                return(this.cardsInHand);
-            // } 
+	clearCardsInHand() {
+		this.cardsInHand = [];
+	}
 
+	tossCard(i: number) {
+		this.cardsInHand.splice(i, 1);
+	}
 
-        
-        // }
-    }
+	getCardsInHand() {
+		return this.cardsInHand;
+	}
 
-    clearCardsInHand(){
-        this.cardsInHand = [];
-    }
-    
-    tossCard(i: number) {
-        this.cardsInHand.splice(i, 1);
-        
-    }
+    /*
+    * Gets the card rank and suit. Then transforms the nummeric array cardInfo to string.
+    * Sets the appropiate icons for the respective suits and ranks.
+    * Returns the string array.
+    */
+	getCardInHand(i: number) {
+		let cardInfo = [ this.cardsInHand[i].getRank(), this.cardsInHand[i].getSuit() ];
 
-    getCardsInHand() {
-        return this.cardsInHand;
-    }
+		let cardInfoStr = cardInfo.map(String);
 
-    getCardInHand(i:number){
-        
-        
-        // if (this.cardsInHand.length == 3) {
-            let cardInfo = [this.cardsInHand[i].getRank(), this.cardsInHand[i].getSuit()];
-        // }
-        
-        let cardInfoStr = cardInfo.map(String);
-        
-        switch (cardInfoStr[0]) {
-            case '1':
-                cardInfoStr[0] = 'A';
-                break;
-            case '11':
-                cardInfoStr[0] = 'Kn';
-                break;
-            case '12':
-                cardInfoStr[0] = 'Q';
-                break;
-             case '13':
-                cardInfoStr[0] = 'K';
-                break;
-            default:
-                break;
-        }
+		switch (cardInfoStr[0]) {
+			case '1':
+				cardInfoStr[0] = 'A';
+				break;
+			case '11':
+				cardInfoStr[0] = 'Kn';
+				break;
+			case '12':
+				cardInfoStr[0] = 'Q';
+				break;
+			case '13':
+				cardInfoStr[0] = 'K';
+				break;
+			default:
+				break;
+		}
 
-        switch (cardInfoStr[1]) {
-            case '0':
-                cardInfoStr[1] = '♥';
-                break;
-            case '1':
-                cardInfoStr[1] = '♦';
-                break;
-            case '2':
-                cardInfoStr[1] = '♠';
-                break;
-            case '3':
-                cardInfoStr[1] = '♣';
-                break;
-        
-            default:
-                break;
-        }
-       
-        return(cardInfoStr);
-    }
+		switch (cardInfoStr[1]) {
+			case '0':
+				cardInfoStr[1] = '♥';
+				break;
+			case '1':
+				cardInfoStr[1] = '♦';
+				break;
+			case '2':
+				cardInfoStr[1] = '♠';
+				break;
+			case '3':
+				cardInfoStr[1] = '♣';
+				break;
+
+			default:
+				break;
+		}
+
+		return cardInfoStr;
+	}
 }
